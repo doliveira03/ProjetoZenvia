@@ -1,0 +1,322 @@
+﻿@model ProjetoZenvia.Models.HomeModel
+@{
+    ViewBag.Title = "Cadastro";
+}
+<link href="~/Content/Cadastro.css" rel="stylesheet" />
+<div class="container">
+    <div class="row">
+        <section>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+
+                @using (Html.BeginForm("Cadastro", "Home", FormMethod.Post))
+                {
+                    <div class="row">
+                        <h3>Informações Gerais</h3>
+                        <hr />
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label>Nome:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-pencil-square"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.Cliente.Nome, new { @class = "form-control", required = "required", title = "Informe o nome do cliente", placeholder = "Nome Completo" })
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Data de Nascimento:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-calendar-o"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.Cliente.DataNascimento, new { @class = "form-control", type = "date", maxlength = "10", required = "required", title = "Informe a data de nascimento" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label>CPF:</label>&nbsp;&nbsp;
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-credit-card"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.Cliente.CPF, new { @class = "form-control", type = "text", required = "required" })
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>RG:</label>&nbsp;&nbsp;
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-credit-card"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.Cliente.RG, new { @class = "form-control", text = "text", required = "required" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h3>Redes Sociais</h3>
+                        <hr />
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label>Facebook:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-facebook-official"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.Cliente.Facebook, new { @class = "form-control", title = "Facebook" })
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Instagram:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-instagram"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.Cliente.Instagram, new { @class = "form-control", title = "Instagram" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label>Linkedin:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-linkedin-square"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.Cliente.Linkedin, new { @class = "form-control", title = "Linkedin" })
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Twitter:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-twitter-square"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.Cliente.Twitter, new { @class = "form-control", title = "Twitter",  })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h3>Contatos</h3>
+                        <hr />
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-5">
+                            <label>Tipo do Contato:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-star-half-o"></i></abbr>
+                                </span>
+                                @Html.DropDownList("ddlTipoContato", new SelectList(Model?.TipoContato, "TipoContatoID", "Descricao", Model?.TipoContato), "SELECIONE", new { @class = "form-control", title = "Número Residencial, comercial, celular" })
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label>Telefone para contato</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-mobile-phone"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.ClienteContato.Numero, new { @class = "form-control", placeholder = "(99) 9999-9999/ (99) 99999-9999", title = "Telefone" })
+                            </div>
+                        </div>
+                        <div class="container col-sm-2">
+                            <label></label>
+                            <button type="button" class="btn btn-info btn-block" id="btnAdicionar" title="Adicionar"><i class="fa fa-plus"></i></button>
+                            <br>
+                        </div>
+                    </div>
+
+                    <table id="tbContato" name="tbContato" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><b />Tipo de Contato</th>
+                                <th class="text-center"><b />Telefone</th>
+                                <th class="text-center"><b />Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @if (Model.Cliente?.ClienteContatos != null)
+                            {
+                                foreach (var tel in Model.Cliente.ClienteContatos)
+                                {
+                                    <tr>
+                                        <td><input type='hidden' name='idTipoContato' id='idTipoContato' value='@tel.TipoContato.TipoContatoID'>@tel.TipoContato.Descricao</td>
+                                        <td><input type='hidden' name='idTelefone' id='idTelefone' value='@tel.Numero'>@tel.Numero</td>
+                                        <td class='excluir'><button type='button' class='btn btn-default' onclick='remove(this)'><i class='fa fa-trash' style='cursor:pointer; color:#008000;'></i></button></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <h3>Endereços</h3>
+                        <hr />
+                    </div>
+                    <div class="row" id="Endereco">
+                        <div class="form-group col-sm-12">
+                            <label>Logradouro:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-map-marker"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.ClienteEndereco.Logradouro, new { @class = "form-control", placeholder = "Rua/Estrada.. Bairro e Cidade", title = "Endereço" })
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label>Complemento:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-tags"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.ClienteEndereco.Complemento, new { @class = "form-control", placeholder = "Casa/ Bloco/ Apto.. Etc", title = "Informe o seu endereço" })
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label>Número :</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <abbr title=""><i class="fa fa-sort-numeric-asc"></i></abbr>
+                                </span>
+                                @Html.TextBoxFor(x => x.ClienteEndereco.Numero, new { @class = "form-control", title = "Informe número" })
+                            </div>
+                        </div>
+                        <div class="container col-sm-2">
+                            <label></label>
+                            <button type="button" class="btn btn-info btn-block" id="btnAdicionar2" title="Adicionar"><i class="fa fa-plus"></i></button>
+                            <br>
+                        </div>
+                    </div>
+
+
+                    <table id="tbEndereco" name="tbEndereco" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><b />Logradouro</th>
+                                <th class="text-center"><b />Complemento</th>
+                                <th class="text-center"><b />Número</th>
+                                <th class="text-center"><b />Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @if (Model.Cliente?.ClienteEnderecos != null)
+                            {
+                                foreach (var endereco in Model.Cliente.ClienteEnderecos)
+                                {
+                                    <tr>
+                                        <td><input type='hidden' name='idLogradouro' id='idLogradouro' value='@endereco.Logradouro'>@endereco.Logradouro</td>
+                                        <td><input type='hidden' name='idComplemento' id='idComplemento' value='@endereco.Complemento'>@endereco.Complemento</td>
+                                        <td><input type='hidden' name='idNumeroEnd' id='idNumeroEnd' value='@endereco.Numero'>@endereco.Numero</td>
+                                        <td class='excluir'><button type='button' class='btn btn-default' onclick='remove(this)'><i class='fa fa-trash' style='cursor:pointer; color:#008000;'></i></button></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                    <ul class="list-inline pull-right">
+                        <li><button type="submit" class="btn btn-success">Salvar</button></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                }
+            </div>
+        </section>
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        $("#Cliente_CPF").mask("999.999.999-99")
+
+
+        $("#btnAdicionar").click(function () {
+            MontaTabelaContato();
+
+
+            $("#ddlTipoContato").val("");
+            $("#ClienteContato_Numero").val("");
+        });
+
+        function MontaTabelaContato() {
+            if ($("#ddlTipoContato").val() == "") {
+                focus("#ddlTipoContato");
+                return false;
+            }
+
+
+            if ($("#ClienteContato_Numero").val() == "") {
+                focus("#ClienteContato_Numero");
+                return false;
+            }
+
+            if ($('table#tbContato thead').hide())
+                $('table#tbContato thead').show();
+
+            $('table#tbContato').find('tbody').append(
+                "<tr>" +
+                "<td><input type='hidden' name='idTipoContato'  id='idTipoContato'   value='" + $("#ddlTipoContato option:selected").val() + "'>" + $("#ddlTipoContato option:selected").text() + "</td>" +
+                "<td><input type='hidden' name='idTelefone' id='idTelefone'  value='" + $("#ClienteContato_Numero").val() + "'>" + $("#ClienteContato_Numero").val() + "</td>" +
+                "<td class='excluir'><button type='button' class='btn btn-default' onclick='remove(this)'><i class='fa fa-trash' style='cursor:pointer; color:#008000;' ></i></button></td>" +
+                "</tr>"
+            );
+
+        }
+
+        $("#btnAdicionar2").click(function () {
+            MontaTabelaEndereco();
+
+            $("#ClienteEndereco_Logradouro").val("");
+            $("#ClienteEndereco_Complemento").val("");
+            $("#ClienteEndereco_Numero").val("");
+        });
+
+        function MontaTabelaEndereco() {
+            if ($("#ClienteEndereco_Logradouro").val() == "") {
+                focus("#ClienteEndereco_Logradouro");
+                return false;
+            }
+
+
+            if ($("#ClienteEndereco_Complemento").val() == "") {
+                focus("#ClienteEndereco_Complemento");
+                return false;
+            }
+
+
+            if ($("#ClienteEndereco_Numero").val() == "") {
+                focus("#ClienteEndereco_Numero");
+                return false;
+            }
+
+            if ($('table#tbEndereco thead').hide())
+                $('table#tbEndereco thead').show();
+
+            $('table#tbEndereco').find('tbody').append(
+                "<tr>" +
+                "<td><input type='hidden' name='idLogradouro' id='idLogradouro'  value='" + $("#ClienteEndereco_Logradouro").val() + "'>" + $("#ClienteEndereco_Logradouro").val() + "</td>" +
+                "<td><input type='hidden' name='idComplemento' id='idComplemento'  value='" + $("#ClienteEndereco_Complemento").val() + "'>" + $("#ClienteEndereco_Complemento").val() + "</td>" +
+                "<td><input type='hidden' name='idNumeroEnd' id='idNumeroEnd'  value='" + $("#ClienteEndereco_Numero").val() + "'>" + $("#ClienteEndereco_Numero").val() + "</td>" +
+                "<td class='excluir'><button type='button' class='btn btn-default' onclick='remove(this)'><i class='fa fa-trash' style='cursor:pointer; color:#008000;' ></i></button></td>" +
+                "</tr>"
+            );
+
+
+        }
+
+
+        //Remove a linha da tabela
+        (function ($) {
+            remove = function (item) {
+                var tr = $(item).closest('tr');
+                tr.fadeOut(400, function () { tr.remove(); });
+                return false;
+            }
+        })(jQuery);
+
+    </script>
+}

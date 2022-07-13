@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bem vindo(a)!</h1>
+    <h2>O que gostaria de fazer hoje?</h2>
+    <br />
+    <section>
+        <div class="container">
+            <div class="row mbr-justify-content-center">
+                <div class="col-lg-6 mbr-col-md-10">
+                    <a class="textWrap" href="@Url.Action("Cadastro", "Home")">
+                        <div class="wrap">
+                            <div class="ico-wrap">
+                                <span class="mbr-iconfont fa fa-pencil-square-o"></span>
+                            </div>
+                            <div class="text-wrap vcenter">
+                                <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Cadastrar Novo Cliente</h2>
+                                <p class="mbr-fonts-style text1 mbr-text display-6">Cadastre um cliente de forma rápida e simplificada, com um formulário intuitivo para facilitar todo o processo.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-6 mbr-col-md-10">
+                    <a class="textWrap" href="@Url.Action("ListarCadastros", "Home")">
+                        <div class="wrap">
+                            <div class="ico-wrap">
+                                <span class="mbr-iconfont fa fa-list"></span>
+                            </div>
+                            <div class="text-wrap vcenter">
+                                <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">
+                                    Visualizar Clientes Cadastrados
+                                </h2>
+                                <p class="mbr-fonts-style text1 mbr-text display-6">Visualize uma lista completa dos clientes que já possuem cadastro conosco e não esqueça de mantê-los atualizados. </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
