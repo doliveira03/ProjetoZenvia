@@ -21,15 +21,20 @@ namespace ProjetoZenvia.Controllers
             _repositorio = new HomeRepositorio();
         }
 
-            public ActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Cadastro()
+        public ActionResult Cadastro(int id)
         {
 
-            return View(HModel());
+            if(id == 0)
+            {
+                return View(HModel());
+            }
+
+            return View("Cadastro", HModel(cliente: _repositorio.Obter(id)));
         }
 
         //[Route("editar-cadastro/{id}")]
@@ -39,49 +44,59 @@ namespace ProjetoZenvia.Controllers
         //}
 
         [HttpPost]
-        public ActionResult Cadastro(HomeModel homeModel, int[] idTipoContato, string[] idTelefone, string[] idLogradouro, string[] idComplemento, string[] idNumeroEnd )
+        public ActionResult Cadastro(HomeModel homeModel, int[] idTipoContato, string[] idTelefone, string[] idLogradouro, string[] idComplemento, string[] idNumeroEnd)
         {
-
-            if (idTipoContato != null)
+            try
             {
-                homeModel.Cliente.ClienteContatos = new List<ClienteContato>();
-
-                for (var i = 0; i <= idTipoContato.Length - 1; i++)
+                if (idTipoContato != null)
                 {
-                    var contato = new ClienteContato
-                    {
-                        ClienteID = homeModel.Cliente.ClienteID,
-                        TipoContatoID = idTipoContato[i],
-                        Numero = idTelefone[i]
-                    };
+                    homeModel.Cliente.ClienteContatos = new List<ClienteContato>();
 
-                    homeModel.Cliente.ClienteContatos.Add(contato);
+                    for (var i = 0; i <= idTipoContato.Length - 1; i++)
+                    {
+                        var contato = new ClienteContato
+                        {
+                            ClienteID = homeModel.Cliente.ClienteID,
+                            TipoContatoID = idTipoContato[i],
+                            Numero = idTelefone[i]
+                        };
+
+                        homeModel.Cliente.ClienteContatos.Add(contato);
+                    }
+
                 }
 
-            }
-
-            if (idLogradouro != null)
-            {
-                homeModel.Cliente.ClienteEnderecos = new List<ClienteEndereco>();
-
-                for (var i = 0; i <= idLogradouro.Length - 1; i++)
+                if (idLogradouro != null)
                 {
-                    var endereco = new ClienteEndereco
+                    homeModel.Cliente.ClienteEnderecos = new List<ClienteEndereco>();
+
+                    for (var i = 0; i <= idLogradouro.Length - 1; i++)
                     {
-                        ClienteID = homeModel.Cliente.ClienteID,
-                        Logradouro = idLogradouro[i],
-                        Complemento = idComplemento[i],
-                        Numero = idNumeroEnd[i]
+                        var endereco = new ClienteEndereco
+                        {
+                            ClienteID = homeModel.Cliente.ClienteID,
+                            Logradouro = idLogradouro[i],
+                            Complemento = idComplemento[i],
+                            Numero = idNumeroEnd[i]
 
-                    };
-                    homeModel.Cliente.ClienteEnderecos.Add(endereco);
+                        };
+                        homeModel.Cliente.ClienteEnderecos.Add(endereco);
+                    }
                 }
+
+                _repositorio.SalvarCliente(homeModel.Cliente);
+
+                TempData["Mensagem"] = "Cadastro realizado com sucesso!!";
+
+                return RedirectToAction("Cadastro", "Home");
+                
             }
+            catch (Exception ex)
+            {
+                TempData["Alerta"] = $"Ocorreu um erro ao submeter formulário : {ex.Message}";
 
-            _repositorio.SalvarCliente(homeModel.Cliente);
-
-
-            return RedirectToAction("Cadastro", "Home");
+                throw new InvalidOperationException(ex.Message);
+            }
         }
 
         public ActionResult ListarCadastros()

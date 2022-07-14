@@ -28,7 +28,7 @@
                             <template></template>
                             <tr>
                                 <td>
-                                    <a href="@Url.Action("Cadastro", "Home", new {id = Model.Cliente.ClienteID})"> @item.Nome </a>
+                                    <a href="@Url.Action("Cadastro", "Home", new { id = item.ClienteID })"> @item.Nome </a>
                                 </td>
                                 <td>
                                     @item.DataNascimento.ToString("dd/MM/yyyy")
