@@ -4,6 +4,7 @@ using ProjetoZenvia.Models;
 using ProjetoZenviaDominio.Interfaces.IServices;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ProjetoZenvia.Controllers
@@ -21,7 +22,7 @@ namespace ProjetoZenvia.Controllers
             _tipoContatoService = tipoContato;
         }
 
-        public ActionResult Cadastro(int id)
+        public ActionResult Cadastro(int id = 0)
         {
             if(id > 0)
             {
@@ -63,7 +64,7 @@ namespace ProjetoZenvia.Controllers
         {
             var model = new BaseViewModel()
             {
-                TipoContato = (IEnumerable<TipoContatoVM>)_tipoContatoService.ListarTipoContato(),
+                TipoContato = TipoContatoDomainToViewModel.MapListTipoContato(_tipoContatoService.ListarTipoContato().ToList()),
                 Cadastros = clientes,
                 Cliente = cliente
             };

@@ -10,7 +10,7 @@ namespace ProjetoZenvia.Models
         public ClienteVM Cliente { get; set; }
         public ClienteContatoVM ClienteContato { get; set; }
         public ClienteEnderecoVM ClienteEndereco { get; set; }
-        public IEnumerable<TipoContatoVM> TipoContato { get; set; }
+        public List<TipoContatoVM> TipoContato { get; set; }
         public List<ClienteVM> Cadastros { get; set; }
     }
 }

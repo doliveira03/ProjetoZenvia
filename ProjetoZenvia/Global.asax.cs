@@ -1,3 +1,6 @@
+using Ninject;
+using Ninject.Web.Mvc;
+using ProjetoZenvia.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +19,9 @@ namespace ProjetoZenvia
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var kernel = new StandardKernel(new ModuloDomainCommon());
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
     }
 }

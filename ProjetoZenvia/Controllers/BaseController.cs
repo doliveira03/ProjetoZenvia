@@ -1,4 +1,5 @@
-﻿using ProjetoZenvia.Models;
+﻿using ProjetoZenvia.Mapper;
+using ProjetoZenvia.Models;
 using ProjetoZenviaDominio.Interfaces.IServices;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace ProjetoZenvia.Controllers
         {
             var model = new BaseViewModel()
             {
-                TipoContato = (IEnumerable<TipoContatoVM>)_tipoContatoService.ListarTipoContato(),
+                TipoContato = TipoContatoDomainToViewModel.MapListTipoContato(_tipoContatoService.ListarTipoContato().ToList()),
                 Cadastros = clientes,
                 Cliente = cliente
             };
