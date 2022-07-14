@@ -1,19 +1,19 @@
-﻿using ProjetoZenviaDominio.DAL;
-using ProjetoZenviaDominio.Entidades;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using ProjetoZenvia.Domain.Entity;
+using ProjetoZenvia.Infra.Context;
+using ProjetoZenviaDominio.Interfaces.IRepository;
 
-namespace ProjetoZenvia.Repositorio
+namespace ProjetoZenvia.Infra.Repository
 {
-    public class HomeRepositorio
+    public class ClienteRepository : IClienteRepository
     {
         private readonly EFContext _context = new EFContext();
 
-        public List<Cliente> ListarCliente()
+        public ClienteRepository(EFContext context) 
         {
-            return _context.Clientes.ToList();
+            _context = context;
         }
 
         public Cliente Obter(int id)
@@ -21,9 +21,9 @@ namespace ProjetoZenvia.Repositorio
             return _context.Clientes.Find(id);
         }
 
-        public IEnumerable<TipoContato> ListarTipoContato()
+        public List<Cliente> ListarCliente()
         {
-            return _context.TiposContato;
+            return  _context.Clientes.ToList();
         }
 
         public void SalvarCliente(Cliente cliente)
@@ -65,6 +65,7 @@ namespace ProjetoZenvia.Repositorio
                 }
             }
         }
-      
+
+  
     }
 }

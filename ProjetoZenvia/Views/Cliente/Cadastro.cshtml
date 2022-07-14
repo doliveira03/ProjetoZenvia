@@ -1,4 +1,4 @@
-﻿@model ProjetoZenvia.Models.HomeModel
+﻿@model ProjetoZenvia.Models.BaseViewModel
 @{
     ViewBag.Title = "Cadastro";
 }
@@ -9,7 +9,7 @@
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
 
-                @using (Html.BeginForm("Cadastro", "Home", FormMethod.Post))
+                @using (Html.BeginForm("Cadastro", "Cliente", FormMethod.Post))
                 {
                     <div class="row">
                         <h3>Informações Gerais</h3>
@@ -31,7 +31,7 @@
                                 <span class="input-group-addon">
                                     <abbr title=""><i class="fa fa-calendar-o"></i></abbr>
                                 </span>
-                                @Html.TextBoxFor(x => x.Cliente.DataNascimento, new { @class = "form-control", type = "date", maxlength = "10", required = "required", title = "Informe a data de nascimento" })
+                                @Html.TextBoxFor(x => x.Cliente.DataNascimento, new { @class = "form-control", maxlength = "10", required = "required", title = "Informe a data de nascimento" })
                             </div>
                         </div>
                     </div>
@@ -232,7 +232,6 @@
     <script type="text/javascript">
 
         $("#Cliente_CPF").mask("999.999.999-99")
-
 
         $("#btnAdicionar").click(function () {
             MontaTabelaContato();

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjetoZenviaDominio.Entidades
+namespace ProjetoZenvia.Domain.Entity
 {
     public class Cliente
     {

@@ -1,13 +1,8 @@
-﻿using ProjetoZenviaDominio.Entidades;
-using System;
-using System.Collections.Generic;
+﻿using ProjetoZenvia.Domain.Entity;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProjetoZenviaDominio.DAL
+namespace ProjetoZenvia.Infra.Context
 {
     public class EFContext : DbContext
     {

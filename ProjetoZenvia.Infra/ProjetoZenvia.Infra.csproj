@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D8AB7D8B-7D03-4CB4-883F-A2D68B589B79}</ProjectGuid>
+    <ProjectGuid>{F5462F14-D0DD-462B-9E0B-DDBFDB7DF51E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProjetoZenviaDominio</RootNamespace>
-    <AssemblyName>ProjetoZenviaDominio</AssemblyName>
+    <RootNamespace>ProjetoZenvia.Infra</RootNamespace>
+    <AssemblyName>ProjetoZenvia.Infra</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -51,13 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\EFContext.cs" />
-    <Compile Include="Entidades\Cliente.cs" />
-    <Compile Include="Entidades\ClienteContato.cs" />
-    <Compile Include="Entidades\ClienteEndereco.cs" />
-    <Compile Include="Entidades\TipoContato.cs" />
+    <Compile Include="Context\EFContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositorio\HomeRepositorio.cs" />
+    <Compile Include="Repository\ClienteRepository.cs" />
+    <Compile Include="Repository\TipoContatoRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProjetoZenviaDominio\ProjetoZenvia.Domain.csproj">
+      <Project>{d8ab7d8b-7d03-4cb4-883f-a2d68b589b79}</Project>
+      <Name>ProjetoZenvia.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
