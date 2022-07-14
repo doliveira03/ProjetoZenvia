@@ -1,0 +1,34 @@
+USE ProjetoZenvia
+
+CREATE TABLE Cliente(
+ClienteID INT NOT NULL IDENTITY PRIMARY KEY,
+Nome VARCHAR(250),
+DataNascimento DATETIME,
+CPF VARCHAR(20),
+RG VARCHAR(20),
+Facebook VARCHAR(300),
+Linkedin VARCHAR(300),
+Twitter VARCHAR(300),
+Instagram VARCHAR(300)
+);
+
+CREATE TABLE ClienteEndereco(
+EnderecoID INT NOT NULL IDENTITY PRIMARY KEY,
+ClienteID INT NOT NULL
+Logradouro VARCHAR(250),
+Complemento VARCHAR(200),
+Numero VARCHAR(20),
+);
+
+CREATE TABLE ClienteContato(
+ContatoID INT NOT NULL IDENTITY PRIMARY KEY,
+ClienteID INT NOT NULL
+TipoContatoID INT NOT NULL,
+Numero VARCHAR(20),
+);
+
+
+CREATE TABLE TipoContato(
+TipoContatoID INT NOT NULL IDENTITY PRIMARY KEY,
+Descricao VARCHAR(50)
+);
