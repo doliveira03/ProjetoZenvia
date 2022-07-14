@@ -25,7 +25,7 @@ namespace ProjetoZenvia.Controllers
             {
                 TipoContato = TipoContatoDomainToViewModel.MapListTipoContato(_tipoContatoService.ListarTipoContato().ToList()),
                 Cadastros = clientes,
-                Cliente = cliente
+                Cliente = cliente ?? new ClienteVM()
             };
 
             return model;

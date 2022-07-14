@@ -10,10 +10,11 @@ namespace ProjetoZenvia.Mapper
 {
     public static class ClienteDomainToViewModel
     {
-        public static Cliente MapCliente(Cliente cliente)
+        public static ClienteVM MapCliente(Cliente cliente)
         {
             var clienteVM = new ClienteVM();
 
+            clienteVM.ClienteID = cliente.ClienteID;
             clienteVM.Nome = cliente.Nome;
             clienteVM.DataNascimento = cliente.DataNascimento;
             clienteVM.CPF = cliente.CPF;
@@ -50,7 +51,7 @@ namespace ProjetoZenvia.Mapper
             });
 
 
-            return cliente;
+            return clienteVM;
         }
 
         public static List<ClienteVM> MapListCliente(List<Cliente> clientes)
@@ -61,6 +62,7 @@ namespace ProjetoZenvia.Mapper
             {
                 clientesVM.Add(new ClienteVM()
                 {
+                    ClienteID = c.ClienteID,
                     Nome = c.Nome,
                     DataNascimento = c.DataNascimento,
                     CPF = c.CPF,

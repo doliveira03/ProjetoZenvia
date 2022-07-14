@@ -25,15 +25,15 @@
                                 @Html.TextBoxFor(x => x.Cliente.Nome, new { @class = "form-control", required = "required", title = "Informe o nome do cliente", placeholder = "Nome Completo" })
                             </div>
                         </div>
-                        <div class="form-group col-sm-6">
+                        @*<div class="form-group col-sm-6">
                             <label>Data de Nascimento:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <abbr title=""><i class="fa fa-calendar-o"></i></abbr>
                                 </span>
-                                @Html.TextBoxFor(x => x.Cliente.DataNascimento, new { @class = "form-control", maxlength = "10", required = "required", title = "Informe a data de nascimento" })
+                                @Html.TextBoxFor(x => x.Cliente.DataNascimento, new { @class = "form-control", type="date", required = "required", title = "Informe a data de nascimento" })
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
@@ -140,13 +140,17 @@
                         <tbody class="text-center">
                             @if (Model.Cliente?.ClienteContatos != null)
                             {
-                                foreach (var tel in Model.Cliente.ClienteContatos)
+                                foreach (var tel in Model.TipoContato)
                                 {
-                                    <tr>
-                                        <td><input type='hidden' name='idTipoContato' id='idTipoContato' value='@tel.TipoContato.TipoContatoID'>@tel.TipoContato.Descricao</td>
-                                        <td><input type='hidden' name='idTelefone' id='idTelefone' value='@tel.Numero'>@tel.Numero</td>
-                                        <td class='excluir'><button type='button' class='btn btn-default' onclick='remove(this)'><i class='fa fa-trash' style='cursor:pointer; color:#008000;'></i></button></td>
-                                    </tr>
+                                    if (Model.Cliente.ClienteContatos.Any(x => x.TipoContatoID == tel.TipoContatoID))
+                                    {
+                                        <tr>
+                                            <td><input type='hidden' name='idTipoContato' id='idTipoContato' value='@tel.TipoContatoID'>@tel.Descricao</td>
+                                            <td><input type='hidden' name='idTelefone' id='idTelefone' value='@( Model.Cliente.ClienteContatos.Where(x => x.TipoContatoID == tel.TipoContatoID).FirstOrDefault().Numero)'>@( Model.Cliente.ClienteContatos.Where(x => x.TipoContatoID == tel.TipoContatoID).FirstOrDefault().Numero)</td>
+                                            <td class='excluir'><button type='button' class='btn btn-default' onclick='remove(this)'><i class='fa fa-trash' style='cursor:pointer; color:#008000;'></i></button></td>
+                                        </tr>
+                                    }
+
                                 }
                             }
                         </tbody>

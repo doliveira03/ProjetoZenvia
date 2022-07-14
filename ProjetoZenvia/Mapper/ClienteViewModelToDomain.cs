@@ -14,6 +14,7 @@ namespace ProjetoZenvia.Mapper
         {
             var cliente = new Cliente();
 
+            cliente.ClienteID = clienteVM.ClienteID;
             cliente.Nome = clienteVM.Nome;
             cliente.DataNascimento = clienteVM.DataNascimento;
             cliente.CPF = clienteVM.CPF;

@@ -9,14 +9,14 @@ using System.Web.Mvc;
 
 namespace ProjetoZenvia.Controllers
 {
-    public class ClienteController : Controller
+    public class ClienteController : BaseController
     {
 
         private readonly IClienteService _clienteService;
         private readonly ITipoContatoService _tipoContatoService;
 
         [Inject]
-        public ClienteController(IClienteService clienteService, ITipoContatoService tipoContato) 
+        public ClienteController(IClienteService clienteService, ITipoContatoService tipoContato) : base(tipoContato)
         {
             _clienteService = clienteService;
             _tipoContatoService = tipoContato;
@@ -26,7 +26,7 @@ namespace ProjetoZenvia.Controllers
         {
             if(id > 0)
             {
-                return View("Cadastro", ClienteDomainToViewModel.MapCliente(_clienteService.Obter(id)));
+                return View("Cadastro", baseVM(cliente: ClienteDomainToViewModel.MapCliente(_clienteService.Obter(id))));
             }
 
             return View(baseVM());
@@ -57,20 +57,9 @@ namespace ProjetoZenvia.Controllers
 
             var retorno = _clienteService.ListarCliente();
 
-            return View(baseVM());
-        }
+            return View(baseVM(clientes: ClienteDomainToViewModel.MapListCliente(retorno)));
 
-        public BaseViewModel baseVM(ClienteVM cliente = null, List<ClienteVM> clientes = null)
-        {
-            var model = new BaseViewModel()
-            {
-                TipoContato = TipoContatoDomainToViewModel.MapListTipoContato(_tipoContatoService.ListarTipoContato().ToList()),
-                Cadastros = clientes,
-                Cliente = cliente
-            };
-
-            return model;
-        }
+        }    
 
     }
 }

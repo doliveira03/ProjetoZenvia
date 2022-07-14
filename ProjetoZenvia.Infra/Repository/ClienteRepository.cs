@@ -19,6 +19,27 @@ namespace ProjetoZenvia.Infra.Repository
         public Cliente Obter(int id)
         {
             return _context.Clientes.Find(id);
+
+            //var query = from c in _context.Clientes
+            //            join cc in _context.ClienteContatos on c.ClienteID equals cc.ClienteID
+            //            join tc in _context.TiposContato on cc.TipoContatoID equals tc.TipoContatoID
+            //            where c.ClienteID == id
+            //            select new Cliente
+            //            {
+            //                ClienteID = c.ClienteID,
+            //                CPF = c.CPF,
+            //                DataNascimento = c.DataNascimento,
+            //                Facebook = c.Facebook,
+            //                Instagram = c.Instagram,
+            //                Linkedin = c.Linkedin,
+            //                Nome = c.Nome,
+            //                RG = c.RG,
+            //                Twitter = c.Twitter,
+            //                ClienteEnderecos = c.ClienteEnderecos,
+            //                ClienteContatos = c.ClienteContatos
+            //            };
+
+            //return query.FirstOrDefault();
         }
 
         public List<Cliente> ListarCliente()

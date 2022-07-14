@@ -13,7 +13,7 @@ namespace ProjetoZenvia.Mapper
         {
             var tipoContatoVM = new List<TipoContatoVM>();
 
-            tipoContatoVM.ForEach(c =>
+            tipoContatos.ForEach(c =>
             {
                 tipoContatoVM.Add(new TipoContatoVM()
                 {
