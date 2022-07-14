@@ -14,7 +14,7 @@ Instagram VARCHAR(300)
 
 CREATE TABLE ClienteEndereco(
 EnderecoID INT NOT NULL IDENTITY PRIMARY KEY,
-ClienteID INT NOT NULL
+ClienteID INT NOT NULL,
 Logradouro VARCHAR(250),
 Complemento VARCHAR(200),
 Numero VARCHAR(20),
@@ -22,7 +22,7 @@ Numero VARCHAR(20),
 
 CREATE TABLE ClienteContato(
 ContatoID INT NOT NULL IDENTITY PRIMARY KEY,
-ClienteID INT NOT NULL
+ClienteID INT NOT NULL,
 TipoContatoID INT NOT NULL,
 Numero VARCHAR(20),
 );
